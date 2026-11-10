@@ -25,20 +25,20 @@
 - Public Release contains actual executable artifacts and build instructions.
 
 ## Task 1: Desktop wrapper
-- [ ] Add failing tests for local URL resolution and navigation policy.
-- [ ] Add Electron main entry, protocol resolver, lifecycle and download handling.
-- [ ] Add packaging configuration and offline assets; run tests/build.
+- [x] Add failing tests for local URL resolution and navigation policy.
+- [x] Add Electron main entry, protocol resolver, lifecycle and download handling.
+- [x] Add packaging configuration and offline assets; run tests/build.
 
 ## Task 2: Distribution
-- [ ] Build portable and per-user installer executables.
-- [ ] Launch built portable exe, verify editing, export and restart persistence.
-- [ ] Update README, public-safe docs, third-party license information and reproducible Windows CI.
+- [x] Build portable and per-user installer executables.
+- [x] Launch built portable exe, verify editing, export and restart persistence.
+- [x] Update README, public-safe docs, third-party license information and reproducible Windows CI.
 
 ## Task 3: Publication
-- [ ] Review source and release allowlists; initialize Git and commit.
-- [ ] Create public Aresto1126/farmer-code-builder repo if absent; push main.
-- [ ] Publish versioned release and exe assets with hashes.
-- [ ] Verify repository visibility, release assets and download URLs.
+- [x] Review source and release allowlists; initialize Git and commit.
+- [x] Create public Aresto1126/farmer-code-builder repo if absent; push main.
+- [x] Publish versioned release and exe assets with hashes.
+- [x] Verify repository visibility, release assets and download URLs.
 
 ## Decisions
 - User explicitly authorized GitHub publication and exe delivery; proceed through concrete publication.
