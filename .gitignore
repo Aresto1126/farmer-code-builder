@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+release/
+artifacts/
+*.zip
+.env
+.env.*

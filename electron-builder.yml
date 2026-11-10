@@ -1,0 +1,44 @@
+appId: io.github.aresto1126.farmercodebuilder
+productName: Farmer Code Builder
+copyright: Copyright © 2026 Aresto1126
+directories:
+  output: release
+  buildResources: build
+files:
+  - dist/**/*
+  - desktop/**/*
+  - build/icon.ico
+  - package.json
+extraResources:
+  - from: licenses
+    to: licenses
+  - from: README.md
+    to: README.md
+asar: true
+electronLanguages:
+  - ja
+  - en-US
+win:
+  icon: build/icon.ico
+  target:
+    - target: portable
+      arch: [x64]
+    - target: nsis
+      arch: [x64]
+  requestedExecutionLevel: asInvoker
+nsis:
+  artifactName: FarmerCodeBuilder-${version}-Windows-x64-Setup.${ext}
+  oneClick: false
+  perMachine: false
+  allowElevation: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Farmer Code Builder
+  deleteAppDataOnUninstall: false
+  installerLanguages: [ja_JP, en_US]
+  language: 1041
+portable:
+  artifactName: FarmerCodeBuilder-${version}-Windows-x64-Portable.${ext}
+  requestExecutionLevel: user
+publish: null

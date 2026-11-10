@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#f5f4ee"/><title>Farmer Code Builder — 農場を、コードで育てる。</title></head>
+<body>
+<div class="app">
+ <header class="topbar">
+  <a class="brand" href="./" aria-label="Farmer Code Builder ホーム"><span class="brand-mark"><i data-lucide="sprout"></i></span><span>FARMER<span class="brand-sub">CODE BUILDER</span></span><span class="version">v0.2</span></a>
+  <div class="header-divider"></div><span class="header-context">農場を、コードで育てる。</span>
+  <div class="top-actions"><span class="local-badge"><span></span>ローカルで動作中</span><button id="help" class="icon-button" aria-label="使い方"><i data-lucide="circle-help"></i></button><button id="settings" class="subtle-button"><i data-lucide="sliders-horizontal"></i>解放設定</button></div>
+ </header>
+ <div class="projectbar">
+  <span class="project-icon"><i data-lucide="folder-open"></i></span><input id="project-name" aria-label="プロジェクト名" maxlength="100" value="はじめての収穫"/><span id="save-state" class="save-state" role="status">準備中</span>
+  <div class="project-actions"><button id="new" class="text-button"><i data-lucide="file-plus-2"></i>新規</button><button id="open" class="text-button"><i data-lucide="folder-open"></i>開く</button><button id="duplicate" class="text-button"><i data-lucide="copy-plus"></i>複製</button><button id="save" class="text-button"><i data-lucide="save"></i>保存</button><button id="json-export" class="subtle-button">JSON保存</button><button id="py-export" class="primary-button"><i data-lucide="download"></i>.py を出力</button></div>
+ </div>
+ <main class="editor">
+  <aside class="sidebar">
+   <div class="sidebar-heading"><span>ブロック</span><span class="eyebrow">BLOCKS</span></div>
+   <label class="search"><i data-lucide="search"></i><input id="block-search" placeholder="ブロックを検索" aria-label="ブロックを検索"/><kbd>/</kbd></label>
+   <nav id="categories" aria-label="ブロックのカテゴリー"></nav>
+   <div class="sidebar-bottom"><div class="little-seed"><i data-lucide="flower-2"></i></div><h3>小さな一歩から。</h3><p>サンプルを開いて、<br/>ブロックをつないでみよう。</p><button id="samples" class="sample-button"><i data-lucide="book-open"></i>サンプルを見る<i data-lucide="arrow-up-right"></i></button></div>
+   <div class="sidebar-footer"><span class="tiny-dot"></span>基本ゲーム / 単一ドローン</div>
+  </aside>
+  <section class="workspace-panel" aria-label="ブロック編集エリア">
+   <div class="panel-toolbar"><div class="tab active"><i data-lucide="blocks"></i>ブロックエディター</div><div class="workspace-actions"><button id="undo" class="icon-button" title="元に戻す" aria-label="元に戻す"><i data-lucide="undo-2"></i></button><button id="redo" class="icon-button" title="やり直す" aria-label="やり直す"><i data-lucide="redo-2"></i></button><span class="toolbar-divider"></span><button id="fit" class="icon-button" title="全体を表示" aria-label="全体を表示"><i data-lucide="maximize"></i></button><button id="arrange" class="icon-button" title="ブロックを整列" aria-label="ブロックを整列"><i data-lucide="align-start-vertical"></i></button></div></div>
+   <div class="canvas-shell"><div id="blockly"></div><div class="canvas-caption"><i data-lucide="mouse-pointer-2"></i>ブロックをドラッグして、処理をつなげましょう</div></div>
+   <div class="workspace-footer"><span><span class="tiny-dot"></span><span id="block-count">0 ブロック</span></span><span id="category-label">制御ブロック</span><span class="footer-key">右クリックで複製・削除</span></div>
+  </section>
+  <aside class="inspector">
+   <div class="panel-toolbar code-toolbar"><span><i data-lucide="code-2"></i>生成コード</span><span class="code-badge">PYTHON-LIKE</span></div>
+   <div class="code-filebar"><span><i data-lucide="file-code-2"></i>main.py</span><button id="copy" class="icon-button" aria-label="コードをコピー" title="コードをコピー"><i data-lucide="copy"></i></button></div>
+   <div id="code-output" class="code-output" aria-label="生成コード"></div>
+   <div class="code-caption"><i data-lucide="refresh-cw"></i>ブロックの変更を自動で反映<span>読み取り専用</span></div>
+   <section class="diagnostics"><div class="section-title"><h2><i data-lucide="list-checks"></i>プログラムの検査</h2><span id="issue-count"></span></div><div id="issues"></div></section>
+   <section class="block-info"><div class="section-title"><h2><i data-lucide="lightbulb"></i>ブロックのヒント</h2></div><h3 id="hint-title">ブロックを選んでみよう</h3><p id="hint-text">選択したブロックの役割と使い方が、ここに表示されます。</p></section>
+   <div class="compatibility"><i data-lucide="info"></i><span>資料照合: Steam build 26462009<br/>ゲーム内の実行はゲーム側で行います。</span></div>
+  </aside>
+ </main>
+ <footer class="statusbar"><span><i data-lucide="sprout"></i>THE FARMER WAS REPLACED · 非公式コード構築ツール</span><span id="compile-state">生成待機中</span><button id="handoff-help">ゲームへの取り込み方<i data-lucide="arrow-up-right"></i></button></footer>
+</div>
+<input type="file" id="file-input" accept="application/json,.json" hidden/>
+<dialog id="open-dialog" class="modal"><div class="modal-heading"><div><span class="eyebrow">YOUR PROJECTS</span><h2>プロジェクトを開く</h2></div><button class="icon-button close-dialog" aria-label="閉じる"><i data-lucide="x"></i></button></div><p class="modal-intro">この端末に保存したプロジェクトです。ファイルから読み込むこともできます。</p><div id="saved-projects"></div><div class="modal-footer"><button id="import-file" class="primary-button"><i data-lucide="folder-open"></i>JSONファイルから読み込む</button></div></dialog>
+<dialog id="settings-dialog" class="modal settings-modal"><div class="modal-heading"><div><span class="eyebrow">GAME PROFILE</span><h2>ゲームの解放設定</h2></div><button class="icon-button close-dialog" aria-label="閉じる"><i data-lucide="x"></i></button></div><p class="modal-intro">あなたのゲームで使える機能を設定します。未確認の機能は警告、未解放の機能は出力エラーになります。</p><label class="form-label">API資料の対象<select id="game-version"><option value="26462009">Steam build 26462009（ローカル資料照合）</option><option value="unknown">バージョン不明 / その他</option></select></label><label class="toggle-row"><input id="all-language" type="checkbox"/><span><strong>ゲームで「すべての言語機能」を有効にしている</strong><small>構文の制限のみ解除します。農作業の研究は別に設定します。</small></span></label><div class="profile-group-heading"><h3>言語の機能</h3><span>使える / 未解放 / 未確認</span></div><div id="language-features" class="feature-grid"></div><div class="profile-group-heading"><h3>農場の機能</h3><span>実際の研究状況に合わせてください</span></div><div id="game-features" class="feature-grid"></div><div class="modal-footer"><button class="subtle-button close-dialog">キャンセル</button><button id="apply-settings" class="primary-button">設定を適用</button></div></dialog>
+<dialog id="samples-dialog" class="modal"><div class="modal-heading"><div><span class="eyebrow">START GROWING</span><h2>サンプルから始める</h2></div><button class="icon-button close-dialog" aria-label="閉じる"><i data-lucide="x"></i></button></div><p class="modal-intro">仕組みを見て、少し変えて、あなたのプログラムへ。現在の作業をJSON保存しておくと、いつでも戻せます。</p><div id="sample-list"></div></dialog>
+<dialog id="help-dialog" class="modal"><div class="modal-heading"><div><span class="eyebrow">FIELD NOTES</span><h2>農場を、コードで育てる。</h2></div><button class="icon-button close-dialog" aria-label="閉じる"><i data-lucide="x"></i></button></div><div class="help-content"><h3>01　ブロックをつなぐ</h3><p>左のカテゴリーを選び、ブロックを中央へドラッグ。「プログラムを開始」の中につなぐと、上から順にコードが生成されます。離れたブロックは下書きです。関数定義は外に置けます。</p><h3>02　条件と研究を確認</h3><p>六角形は条件、丸い値は数値やセンサーです。解放設定を実際のゲームに合わせ、赤いエラーを直します。問題一覧を押すと該当ブロックへ移動できます。</p><h3>03　ゲームへ渡す</h3><p>コピーしたコードをゲーム内のコードウィンドウへ貼り付けるか、「.py を出力」で保存します。外部ファイル編集はゲーム内の外部エディター案内から保存先を確認し、File Watcherを有効にしてください。新規ファイルの反映手順はゲーム内ヘルプを確認します。</p><h3>作業の保存</h3><p>この端末に自動保存します。「JSON保存」はブロック構造を含む持ち運び用ファイルです。「開く」で戻せます。.pyにはブロック配置は含まれません。</p><h3>初期版の対応範囲</h3><p>基本ゲーム・単一ドローン向け。関数の引数は0〜1個です。ゲームの完全なシミュレーション、採掘DLC、Pythonからブロックへの変換には対応していません。API資料は照合済みですが、生成プログラムのゲーム内動作は未検証です。</p></div><div class="modal-footer"><button class="primary-button close-dialog">つくり始める<i data-lucide="arrow-right"></i></button></div></dialog>
+<dialog id="confirm-dialog" class="modal compact-modal"><div class="modal-heading"><h2 id="confirm-title"></h2></div><p id="confirm-text" class="modal-intro"></p><div class="modal-footer"><button id="confirm-cancel" class="subtle-button">キャンセル</button><button id="confirm-ok" class="primary-button">続ける</button></div></dialog>
+<div id="toast" class="toast" role="status"></div>
+<script type="module" src="/src/main.js"></script>
+</body></html>
